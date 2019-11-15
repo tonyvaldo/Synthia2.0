@@ -1,69 +1,108 @@
 'use strict';
 
-let whaleOne
+let whaleOne;
+let buttonOne;
 let whaleTwo;
+let buttonTwo;
 let whaleThree;
+
 let whaleFour;
+
 let whaleFive;
 
-// let bubbles1;
-// let bubbles2;
+let pNoise;
+let playing;
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
-// bubbles1 = new Bubbles(300,300);
-// bubbles2 = new Bubbles(300,300);
 
   whaleOne = new p5.Oscillator('sine');
   whaleOne.setType();
   whaleOne.freq(250);
   whaleOne.amp(0.5);
 
+  buttonOne = createButton('Whale  on/off')
+    buttonOne.mousePressed(toggleWhaleOne);
+    buttonOne.position(100, 500);
+
+  whaleTwo = new p5.Oscillator('sine');
+  whaleTwo.setType();
+  whaleTwo.freq(500);
+  whaleTwo.amp(0.5);
+
+  buttonTwo = createButton('Whale  on/off')
+    buttonTwo.mousePressed(toggleWhaleTwo);
+    buttonTwo.position(200, 200);
+
 }
 
 function draw() {
   background(9, 198, 211);
-drawBubble1();
-drawBubble2();
-drawBubble3();
-drawBubble4();
 
+  drawBubble1();
+  drawBubble2();
+  drawBubble3();
+  drawBubble4();
+
+  pNoise = noise(frameCount / 20) * 100;
+
+whaleOne.freq((40, 250) + pNoise);
+  whaleOne.amp(sin(frameCount / 90), -1, 1, .05, .1);
+whaleTwo.freq((40, 550) + pNoise);
+  whaleTwo.amp(sin(frameCount / 90), -1, 1, .05, .1);
 }
 
 function drawBubble1(){
   noStroke();
    fill(139, 222, 247)
-   circle(300, 100, 40);
+   circle(600, 100, 60);
 
    fill(205, 250, 250)
-   circle(307, 100, 15);
-
+   circle(607, 100, 15);
 }
 function drawBubble2(){
   noStroke();
    fill(139, 222, 247)
-   circle(300, 200, 40);
+   circle(200, 200, 60);
 
    fill(205, 250, 250)
-   circle(307, 200, 15);
-
+   circle(207, 200, 15);
 }
 function drawBubble3(){
   noStroke();
    fill(139, 222, 247)
-   circle(300, 300, 40);
+   circle(400, 300, 60);
 
    fill(205, 250, 250)
-   circle(307, 300, 15);
-
+   circle(407, 300, 15);
 }
 function drawBubble4(){
   noStroke();
    fill(139, 222, 247)
-   circle(300, 400, 40);
+   circle(100, 500, 60);
 
    fill(205, 250, 250)
-   circle(307, 400, 15);
+   circle(107, 500, 15);
+}
 
+function toggleWhaleOne(){
+  if (!playing) {
+    whaleOne.start();
+    playing = true;
+
+  } else {
+    whaleOne.stop();
+    playing = false;
+  }
+}
+function toggleWhaleTwo(){
+  if (!playing) {
+    whaleTwo.start();
+    playing = true;
+
+  } else {
+    whaleTwo.stop();
+    playing = false;
+  }
 }
