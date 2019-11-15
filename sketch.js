@@ -5,7 +5,7 @@ let buttonOne;
 let whaleTwo;
 let buttonTwo;
 let whaleThree;
-
+let buttonThree;
 let whaleFour;
 
 let whaleFive;
@@ -22,7 +22,7 @@ function setup() {
   whaleOne.freq(250);
   whaleOne.amp(0.5);
 
-  buttonOne = createButton('Whale  on/off')
+  buttonOne = createButton('Momma Whale  on/off')
     buttonOne.mousePressed(toggleWhaleOne);
     buttonOne.position(100, 500);
 
@@ -31,9 +31,18 @@ function setup() {
   whaleTwo.freq(500);
   whaleTwo.amp(0.5);
 
-  buttonTwo = createButton('Whale  on/off')
+  buttonTwo = createButton('Baby Whale  on/off')
     buttonTwo.mousePressed(toggleWhaleTwo);
     buttonTwo.position(200, 200);
+
+  whaleThree = new p5.Oscillator('sine');
+  whaleThree.setType();
+  whaleThree.freq(500);
+  whaleThree.amp(0.5);
+
+  buttonThree = createButton('Papa Whale  on/off')
+    buttonThree.mousePressed(toggleWhaleThree);
+    buttonThree.position(400, 300);
 
 }
 
@@ -51,6 +60,8 @@ whaleOne.freq((40, 250) + pNoise);
   whaleOne.amp(sin(frameCount / 90), -1, 1, .05, .1);
 whaleTwo.freq((40, 550) + pNoise);
   whaleTwo.amp(sin(frameCount / 90), -1, 1, .05, .1);
+whaleThree.freq((0, 50) + pNoise);
+  whaleThree.amp(sin(frameCount / 90), -1, 1, .05, .1);
 }
 
 function drawBubble1(){
@@ -103,6 +114,16 @@ function toggleWhaleTwo(){
 
   } else {
     whaleTwo.stop();
+    playing = false;
+  }
+}
+function toggleWhaleThree(){
+  if (!playing) {
+    whaleThree.start();
+    playing = true;
+
+  } else {
+    whaleThree.stop();
     playing = false;
   }
 }
