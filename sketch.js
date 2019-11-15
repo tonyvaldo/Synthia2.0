@@ -7,8 +7,7 @@ let buttonTwo;
 let whaleThree;
 let buttonThree;
 let whaleFour;
-
-let whaleFive;
+let buttonFour;
 
 let pNoise;
 let playing;
@@ -44,6 +43,15 @@ function setup() {
     buttonThree.mousePressed(toggleWhaleThree);
     buttonThree.position(400, 300);
 
+  whaleFour = new p5.Oscillator('sine');
+  whaleFour.setType();
+  whaleFour.freq(500);
+  whaleFour.amp(0.5);
+
+  buttonFour = createButton('Uncle Whale  on/off')
+    buttonFour.mousePressed(toggleWhaleFour);
+    buttonFour.position(500, 100);
+
 }
 
 function draw() {
@@ -59,9 +67,11 @@ function draw() {
 whaleOne.freq((40, 250) + pNoise);
   whaleOne.amp(sin(frameCount / 90), -1, 1, .05, .1);
 whaleTwo.freq((40, 550) + pNoise);
-  whaleTwo.amp(sin(frameCount / 90), -1, 1, .05, .1);
+  whaleTwo.amp(sin(frameCount / 100), -1, 1, .05, .1);
 whaleThree.freq((0, 50) + pNoise);
-  whaleThree.amp(sin(frameCount / 90), -1, 1, .05, .1);
+  whaleThree.amp(sin(frameCount / 80), -1, 1, .05, .1);
+whaleFour.freq((20, 380) + pNoise);
+  whaleFour.amp(sin(frameCount / 100), -1, 1, .05, .1);
 }
 
 function drawBubble1(){
@@ -124,6 +134,16 @@ function toggleWhaleThree(){
 
   } else {
     whaleThree.stop();
+    playing = false;
+  }
+}
+function toggleWhaleFour(){
+  if (!playing) {
+    whaleFour.start();
+    playing = true;
+
+  } else {
+    whaleFour.stop();
     playing = false;
   }
 }
